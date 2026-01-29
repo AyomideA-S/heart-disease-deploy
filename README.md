@@ -12,7 +12,8 @@ A machine learning pipeline to predict heart disease presence based on the UCI C
 ## Setup
 
 1. Clone the repo.
-2. Install dependencies: `pip install -r requirements.txt` (Coming soon)
+2. Install dependencies: `pip install -r requirements.txt`
+3. Run the API: `uvicorn src.app:app --reload`
 
 ## Dataset Description
 

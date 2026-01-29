@@ -1,0 +1,79 @@
+from fastapi import FastAPI
+from pydantic import BaseModel
+from joblib import load  # type: ignore
+import pandas as pd  # type: ignore
+
+# List of columns exactly as they appeared during training
+model_columns = [
+    "age",
+    "sex",
+    "trestbps",
+    "chol",
+    "fbs",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "ca",
+    "cp_2",
+    "cp_3",
+    "cp_4",
+    "restecg_1",
+    "restecg_2",
+    "slope_2",
+    "slope_3",
+    "thal_6",
+    "thal_7",
+]
+
+map_columns = {
+    "cp": {2: "cp_2", 3: "cp_3", 4: "cp_4"},
+    "restecg": {1: "restecg_1", 2: "restecg_2"},
+    "slope": {2: "slope_2", 3: "slope_3"},
+    "thal": {6: "thal_6", 7: "thal_7"},
+}
+
+app = FastAPI()
+model = load("models/heart_disease_model.joblib")
+scaler = load("models/scaler.joblib")
+
+
+@app.get("/")
+async def root():
+    return {"status": "alive"}
+
+
+class HeartDiseaseInput(BaseModel):
+    age: float
+    sex: int
+    cp: int
+    trestbps: float
+    chol: float
+    fbs: int
+    restecg: int
+    thalach: float
+    exang: int
+    oldpeak: float
+    slope: int
+    ca: int
+    thal: int
+
+
+def map_dummies(df: pd.DataFrame) -> pd.DataFrame:
+    for col in map_columns.keys():
+        if df[col].map(map_columns[col]).isnull().all():
+            continue
+        df_col = df[col].map(map_columns[col])
+        df[df_col] = True
+    return df
+
+
+@app.post("/predict")
+async def predict(data: HeartDiseaseInput):
+    input_df = pd.DataFrame([data.model_dump()])
+    input_df = map_dummies(input_df)
+    input_df = input_df.reindex(columns=model_columns, fill_value=False)
+
+    features_scaled = scaler.transform(input_df)
+    prediction = model.predict(features_scaled)
+
+    return {"heart_disease": int(prediction[0])}
