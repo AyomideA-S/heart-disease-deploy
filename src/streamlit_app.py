@@ -1,7 +1,8 @@
+import os
 import streamlit as st  # type: ignore
 import requests  # type: ignore
 
-API_URL = "http://127.0.0.1:8000/predict"
+API_URL = os.getenv("API_URL", "http://127.0.0.1:8000/predict")
 
 st.title("Heart Disease Prediction")
 

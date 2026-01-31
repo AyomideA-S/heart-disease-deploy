@@ -12,9 +12,13 @@ A machine learning pipeline to predict heart disease presence based on the UCI C
 ## Setup
 
 1. Clone the repo.
-2. Install dependencies: `pip install -r requirements.txt`
-3. Run the API: `uvicorn src.app:app --reload`
-4. Access the Streamlit app: `streamlit run src/streamlit_app.py`
+2. Run the app on your local machine:
+    - Install dependencies: `pip install -r requirements.txt`
+    - Run the API: `uvicorn src.app:app --reload`
+    - Access the Streamlit app: `streamlit run src/streamlit_app.py`
+3. Alternatively, use Docker Compose to run both services: `docker-compose up`
+    - Access the app at `http://localhost:8501`
+    - Access the API at `http://localhost:8000`
 
 ## Dataset Description
 

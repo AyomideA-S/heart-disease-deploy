@@ -1,0 +1,44 @@
+# Docker Compose configuration file to set up backend and frontend services
+services:
+  backend:
+    # Build context is the current directory (contains Dockerfile)
+    build: .
+    # Specify the image name and tag
+    image: heart_disease_backend:latest
+    # Specify the container name
+    container_name: heart_disease_backend
+    # Specify the working directory
+    working_dir: /app
+    # Mount the current directory to /app in the container
+    volumes:
+      - ./:/app
+    # Mapping ports on host to container
+    ports:
+      - "8000:8000"
+    # Command to run the FastAPI app with Uvicorn
+    command: uvicorn src.app:app --host=0.0.0.0 --port=8000 --reload
+    # Restart the container on change
+    restart: always
+
+  frontend:
+    # Build context is the current directory (contains Dockerfile)
+    build: .
+    # Specify the image name and tag
+    image: heart_disease_frontend:latest
+    # Specify the container name
+    container_name: heart_disease_frontend
+    # Specify the working directory
+    working_dir: /app
+    # Mount the current directory to /app in the container
+    volumes:
+      - ./:/app
+    # Mapping ports on host to container
+    ports:
+      - "8501:8501"
+    # Set environment variable for API URL
+    environment:
+      - API_URL=http://backend:8000/predict
+    # Command to run the Streamlit app
+    command: "streamlit run src/streamlit_app.py"
+    # Restart the container on change
+    restart: always
