@@ -1,5 +1,6 @@
+fastapi
+joblib
 pandas
 scikit-learn
-joblib
-fastapi
+streamlit
 uvicorn

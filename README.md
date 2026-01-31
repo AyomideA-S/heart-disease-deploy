@@ -14,6 +14,7 @@ A machine learning pipeline to predict heart disease presence based on the UCI C
 1. Clone the repo.
 2. Install dependencies: `pip install -r requirements.txt`
 3. Run the API: `uvicorn src.app:app --reload`
+4. Access the Streamlit app: `streamlit run src/streamlit_app.py`
 
 ## Dataset Description
 
@@ -33,7 +34,7 @@ Here's a brief description of the features:
 | **`fbs`** | Fasting Blood Sugar | Whether fasting blood sugar > 120 mg/dl. | `1` = True<br>`0` = False |
 | **`restecg`** | Resting ECG | Resting electrocardiographic results. | `0` = Normal<br>`1` = ST-T wave abnormality<br>`2` = Left ventricular hypertrophy |
 | **`thalach`** | Max Heart Rate | Maximum heart rate achieved during the test. | |
-| **`exang`** | Exercise Induced Angina | Chest pain caused by exercise? | `1` = Yes<br>`0` = No |
+| **`exang`** | Exercise-Induced Angina | Chest pain caused by exercise? | `1` = Yes<br>`0` = No |
 | **`oldpeak`** | ST Depression | ST depression induced by exercise relative to rest (indicates heart stress). | |
 | **`slope`** | **Slope** | The slope of the peak exercise ST segment. | `1` = Upsloping<br>`2` = Flat<br>`3` = Downsloping |
 | **`ca`** | **Major Vessels** | Number of major vessels colored by fluoroscopy. | `0` to `3` |
