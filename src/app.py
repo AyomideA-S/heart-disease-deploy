@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from joblib import load  # type: ignore
 import pandas as pd  # type: ignore
@@ -35,6 +36,15 @@ map_columns = {
 app = FastAPI()
 model = load("models/heart_disease_model.joblib")
 scaler = load("models/scaler.joblib")
+
+# Allow connections from anywhere (for now)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # In production, we'd list specific domains here
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")
