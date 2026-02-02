@@ -2,12 +2,52 @@
 
 A machine learning pipeline to predict heart disease presence based on the UCI Cleveland dataset.
 
+![App Screenshot](assets/app_screenshot.png)
+
+## Live Demo
+
+Check out the live application here: [Heart Disease Predictor](https://heart-frontend-856s.onrender.com)
+
+## Model Performance
+
+The model was evaluated on a reserved test set (20% of data).
+
+| Metric | Score | Description |
+| :- | - | - |
+| **Accuracy** | **83%** | Overall correctness of predictions. |
+| **Recall (Class 1)** | **0.79** | The model correctly identifies 79% of positive heart disease cases. |
+| **Precision (Class 1)** | **0.85** | When the model predicts disease, it is correct 85% of the time. |
+
+### Confusion Matrix
+
+The model successfully identified **22 out of 28** positive cases in the test batch.
+
+![Confusion Matrix](assets/confusion_matrix.png)
+
 ## Project Structure
 
 - `data/`: Contains raw and processed data (ignored by git).
 - `notebooks/`: Jupyter notebooks for exploration and prototyping.
 - `src/`: Production-ready Python scripts.
 - `models/`: Serialized models (ignored by git).
+
+## Tech Stack 🛠️
+
+This project uses a decoupled architecture with a separate frontend and backend, containerized for portability.
+
+- **Machine Learning**:
+  - `scikit-learn`: Model training and evaluation.
+  - `pandas` & `numpy`: Data manipulation and preprocessing.
+  - `joblib`: Model serialization.
+- **Backend API**:
+  - `FastAPI`: High-performance web framework for serving predictions.
+  - `Uvicorn`: ASGI server for production.
+- **Frontend UI**:
+  - `Streamlit`: Interactive web interface for users.
+- **DevOps & Deployment**:
+  - `Docker`: Containerization of services.
+  - `Docker Compose`: Orchestration of multi-container environments.
+  - `Render`: Cloud platform for deployment.
 
 ## Setup
 
