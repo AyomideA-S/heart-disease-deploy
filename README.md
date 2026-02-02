@@ -29,7 +29,7 @@ The model successfully identified **22 out of 28** positive cases in the test ba
 - `data/`: Contains raw and processed data (ignored by git).
 - `notebooks/`: Jupyter notebooks for exploration and prototyping.
 - `src/`: Production-ready Python scripts.
-- `models/`: Serialized models (ignored by git).
+- `models/`: Serialized models.
 
 ## Tech Stack 🛠️
 
